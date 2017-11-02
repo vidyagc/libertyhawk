@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
+  # as :user do
+  #   get 'login', to: 'devise/sessions#new'
+  #   delete 'logout', to: 'devise/sessions#destroy'
+  # end
+  
+  
   get 'welcome/index'
 
   get 'welcome/about'
@@ -6,6 +14,8 @@ Rails.application.routes.draw do
   get 'index/about'
   
   root 'welcome#index'
+  
+  get 'members/:chamber', to: 'members#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
