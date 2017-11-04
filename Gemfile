@@ -18,5 +18,4 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'devise'
-
 gem 'httparty'

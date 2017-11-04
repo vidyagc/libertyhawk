@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   #   delete 'logout', to: 'devise/sessions#destroy'
   # end
   
+  get 'foobar/new', to: 'foo#new'
+  post 'foobar', to: 'foo#search'
+  
   
   get 'welcome/index'
 
