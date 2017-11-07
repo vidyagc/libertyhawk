@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
   
+devise_scope :user do
+  get '/users/sign_out' => 'devise/sessions#destroy'
+end
+  
   # as :user do
   #   get 'login', to: 'devise/sessions#new'
   #   delete 'logout', to: 'devise/sessions#destroy'
   # end
   
-  get 'foobar/new', to: 'foo#new'
-  post 'foobar', to: 'foo#search'
+  get 'subject_searches/', to: 'subject_searches#index'
+
+  get 'subject_searches/search', to: 'subject_searches#search'
+  post 'subject_searches/search', to: 'subject_searches#search'
   
+  post 'subject_searches/run', to: 'subject_searches#run'
+  
+  # get "/users/sign_out"
   
   get 'welcome/index'
 
