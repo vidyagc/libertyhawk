@@ -1,0 +1,12 @@
+<!-- have button to save as in foundation favorites -->
+<!-- get param passed for the search result -->
+    <!-- right now try with one, then get array working -->
+
+<h4>New Partial</h4>
+
+<p>@results.inspect --------- <%= @results.inspect %></p>
+
+<form action="create" accept-charset="UTF-8" method="post" params>
+    <input name="metadata" type="hidden" value=<%= @results.inspect %> />
+    <input type="submit" name="Save" value=Save />
+</form>

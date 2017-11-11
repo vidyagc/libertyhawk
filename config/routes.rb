@@ -13,9 +13,7 @@ end
   get 'subject_searches/', to: 'subject_searches#index'
 
   get 'subject_searches/search', to: 'subject_searches#search'
-  post 'subject_searches/search', to: 'subject_searches#search'
-  
-  post 'subject_searches/run', to: 'subject_searches#run'
+  post 'subject_searches/create', to: 'subject_searches#create'
   
   # get "/users/sign_out"
   
