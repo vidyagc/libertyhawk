@@ -1,0 +1,13 @@
+<%= render 'form' %>
+<p></p>
+
+<% if current_user && current_user.bills %>
+    <% current_user.bills.each do |bill| %>
+    
+        <%= render 'favorites/new', bill: bill %><p></p>
+    
+    <% end %>
+<% end %>
+
+<!-- consider pagination for results -->
+

@@ -11,7 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111200402) do
+ActiveRecord::Schema.define(version: 20171217185552) do
+
+  create_table "bills", force: :cascade do |t|
+    t.string   "bill_id"
+    t.string   "title"
+    t.text     "summary"
+    t.string   "date"
+    t.string   "sponsor"
+    t.string   "sponsor_state"
+    t.string   "sponsor_party"
+    t.string   "link"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "bills", ["user_id"], name: "index_bills_on_user_id"
+
+  create_table "favorites", force: :cascade do |t|
+    t.string   "bill_id"
+    t.string   "title"
+    t.text     "summary"
+    t.string   "date"
+    t.string   "sponsor"
+    t.string   "sponsor_state"
+    t.string   "sponsor_party"
+    t.string   "link"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "searches", force: :cascade do |t|
     t.text     "metadata"

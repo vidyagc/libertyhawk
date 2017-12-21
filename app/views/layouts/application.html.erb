@@ -1,14 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title>Workspace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
 </head>
 <body>
-
-<%= yield %>
+    
+    <!-- https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 -->
+    
+<nav class="navbar navbar-default navbar-static-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <%= link_to "Liberty Hawk", root_path, :class =>"navbar-brand", :style =>"font-family: 'Playball', cursive; font-size: 2em; color: #fbce47;" %>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Search", searches_search_path %></li>
+        <li><%= link_to "My Bills", users_show_path %></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"> About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    
+    
+<div class="container" style="border:1px solid black;">
+  <div class="row justify-content-md-center">
+      
+        <% if flash[:notice] %>
+            <div class="alert alert-success wrap">
+               <button type="button" class="close" data-dismiss="alert">&times;</button>
+               <%= flash[:notice] %>
+             </div>
+         <% elsif flash[:alert] %>
+            <div class="alert alert-warning wrap">
+               <button type="button" class="close" data-dismiss="alert">&times;</button>
+               <%= flash[:alert] %>
+            </div>
+         <% end %>
+      
+      <div class="col-md-12" style="border:1px solid black;">
+         
+          
+        <%= yield %>
+        
+      </div>
+    </div>
+</div>
 
 </body>
 </html>

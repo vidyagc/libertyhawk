@@ -1,0 +1,13 @@
+<% @favorite = Favorite.find(favorite.id) %>
+<!-- need this, or can just pass favorite.id ? -->
+
+<%= form_tag url_for(:controller => "favorites", :action => "destroy"), :method => :DELETE do %>
+ <div class="form-group">
+    <%= hidden_field_tag :id , @favorite.id %>
+    
+    <div class="form-group">
+        <%= submit_tag "delete" %>
+    </div>
+    
+ </div>
+<% end %>

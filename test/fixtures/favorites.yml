@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bill_id: MyString
+  title: MyString
+  summary: MyText
+  date: MyString
+  sponsor: MyString
+  sponsor_state: MyString
+  sponsor_party: MyString
+  link: MyString
+  user_id: 
+
+two:
+  bill_id: MyString
+  title: MyString
+  summary: MyText
+  date: MyString
+  sponsor: MyString
+  sponsor_state: MyString
+  sponsor_party: MyString
+  link: MyString
+  user_id: 

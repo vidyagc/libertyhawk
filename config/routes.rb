@@ -1,19 +1,31 @@
 Rails.application.routes.draw do
+  get 'users/show'
+
   devise_for :users
   
 devise_scope :user do
   get '/users/sign_out' => 'devise/sessions#destroy'
 end
+
+# post 'searches/create' => 'favorites#create'
   
+# resources :favorites, only: [:create, :destroy, :show]
+
+post 'favorites/create' => 'favorites#create'
+delete 'favorites/remove' => 'favorites#destroy'
+get 'bill' => 'searches#show'
+delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
+
   # as :user do
   #   get 'login', to: 'devise/sessions#new'
   #   delete 'logout', to: 'devise/sessions#destroy'
   # end
   
-  get 'subject_searches/', to: 'subject_searches#index'
+  get 'searches/', to: 'searches#index'
 
-  get 'subject_searches/search', to: 'subject_searches#search'
-  post 'subject_searches/create', to: 'subject_searches#create'
+  get 'searches/search', to: 'searches#search'
+
+# post 'searches/create', to: 'searches#create'
   
   # get "/users/sign_out"
   

@@ -1,0 +1,32 @@
+<p></p>
+
+<% @bill = Bill.find(bill.id) %>
+
+<b><%= link_to bill.title, bill %></b>
+
+<table class="search-layout">
+  <tr>
+    <td>Sponsor:</td>
+    <td><%= bill.sponsor %>, <b><%= bill.sponsor_party %></b>-<%= bill.sponsor_state %></td>
+  </tr>
+</table>
+
+
+<%= form_tag url_for(:controller => "favorites", :action => "create"), :method => :POST do %>
+ <div class="form-group">
+    <%= hidden_field_tag :id , @bill.id %>
+    
+    <% if Favorite.where(bill_id: @bill.bill_id).present? %>
+    
+      <%= link_to favorites_remove_two_path(@bill), method: "delete", class: "btn btn-default btn-unsave" do %>
+        Unsave
+      <% end %>
+
+    <% else %>
+        <%= button_tag(type: "submit", class: "btn btn-default btn-save") do %>
+            <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
+        <% end %>
+    <% end %>
+ </div>
+<% end %>
+

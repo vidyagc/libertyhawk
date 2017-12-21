@@ -12,4 +12,21 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+.navbar-custom {
+    background-color: #5a59a3 !important;
+    /*#312f8c !important;*/
+    border-color: #484782 !important;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.navbar-custom .navbar-brand, .navbar-nav  > li > a {
+    font-family: 'Archivo', sans-serif;
+}
+
+.navbar-custom .navbar-nav  > li > a {
+    color: #fff !important;
+}

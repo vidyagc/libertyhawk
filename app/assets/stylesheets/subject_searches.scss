@@ -1,3 +1,26 @@
 // Place all the styles related to the SubjectSearches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn-save {
+    background-color: #e46165 !important;
+    color: #fff !important;
+}
+
+.btn-base, .btn-save, .btn-unsave {
+    font-family: 'Archivo', sans-serif !important;
+    letter-spacing: .75px !important; 
+}
+
+.btn-save, .btn-unsave {
+    margin-top: 15px;
+}
+
+.nopadding {
+   padding-left: 0 !important;
+   margin: 0 !important;
+}
+
+.search-layout td { 
+    padding-right: 15px;
+}

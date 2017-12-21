@@ -1,0 +1,9 @@
+<h2>My Research</h2>
+
+<% @user.favorites.each do |favorite| %>
+
+    <%= favorite.title %><p></p>
+    
+    <%= render 'favorites/remove', favorite: favorite %><p></p>
+
+<% end %>
