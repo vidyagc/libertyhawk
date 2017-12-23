@@ -7,9 +7,9 @@
     color: #fff !important;
 }
 
-.btn-base, .btn-save, .btn-unsave {
+.btn-basic, .btn-save, .btn-unsave {
     font-family: 'Archivo', sans-serif !important;
-    letter-spacing: .75px !important; 
+    letter-spacing: .5px !important; 
 }
 
 .btn-save, .btn-unsave {
@@ -23,4 +23,8 @@
 
 .search-layout td { 
     padding-right: 15px;
+}
+
+.btn-basic {
+    border: 1px solid #B0B0B0 !important;
 }

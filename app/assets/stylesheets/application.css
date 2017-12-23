@@ -15,9 +15,52 @@
  *= require font-awesome
  */
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Archivo', sans-serif !important;
+    letter-spacing: .5px !important;
+}
+
+.auth {
+    font-family: 'Archivo', sans-serif;
+    letter-spacing: .5px;
+    font-weight: normal;
+    /*background-color: pink;*/
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.auth-space {
+    padding-bottom: 7px;
+}
+
+.col-width div.auth {
+    /*max-width:225px;*/
+    width: 225px;
+}
+
+.block { 
+    min-height:260px;
+}
+
+@media screen and (min-width: 992px) {
+    .login-border {
+        border-right: 2px solid #E0E0E0;
+        min-width: 315px;
+        margin-right: 15px !important;
+    }
+}
+
 .navbar-custom {
     background-color: #5a59a3 !important;
-    /*#312f8c !important;*/
     border-color: #484782 !important;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -30,3 +73,12 @@
 .navbar-custom .navbar-nav  > li > a {
     color: #fff !important;
 }
+
+.field {
+    padding-bottom: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .mid-field {
+        margin-right: 25px;
+    }

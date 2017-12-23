@@ -1,26 +1,66 @@
-<h2>Log in</h2>
+<div class="row col-width">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+  <div class="col-md-3 col-sm-12 login-border" style="">
+    <!--remove right padding or other to get other two closer?-->
+    <!--background-color: pink;-->
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <h3>Current User</h3>
+    <div class="auth-space"></div>
+  <div class="">
+    <div class ="auth block">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, :class=>"form-control", autofocus: true %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, :class=>"form-control", autocomplete: "off" %>
+      </div>
+    
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+      <div class="actions">
+        <%= f.submit "Log in", :class=>"btn btn-basic" %>
+      </div>
+    <% end %>
+    
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  </div>
 
-<%= render "devise/shared/links" %>
+<div class="col-md-3 col-sm-4 mid-field">
+  <h3>New Account</h3>
+  <div class="auth-space"></div>
+  
+  <%= render "devise/registrations/new" %>
+  
+    </div>
+  
+  <div class="col-md-3 col-sm-4 auth" style="margin-left: 0px; "> 
+  <!--set the margin for diff widths @media in css-->
+    <h3>&nbsp;</h3>
+  
+  <div class="auth-space"></div>
+  <p><span style="color:#d56367;"><b>BENEFITS</b></span><br>anyone can use Liberty Hawk to search bills and access the top Google News search results for bills. Opening an account gives you access to the following additional functionality:</p>
+  <table>
+  <tr valign="top">
+    <td><i class="fa fa-star" aria-hidden="true" style="padding-right:5px; color:#d56367;"></i></td>
+    <td>Save searched bills</td>
+  </tr>
+  <tr valign="top">
+    <td><i class="fa fa-star" aria-hidden="true" style="padding-right:5px; color:#d56367;"></i></td>
+    <td>Access your last ten searches</td>
+  </tr>
+</table>
+    
+  </div>
+  
+<!--<div class="col-sm-4 hidden-lg hidden-md hidden-xs"></div>-->
+  
+</div>

@@ -16,7 +16,7 @@
  <div class="form-group">
     <%= hidden_field_tag :id , @bill.id %>
     
-    <% if Favorite.where(bill_id: @bill.bill_id).present? %>
+    <% if current_user && current_user.favorites.where(bill_id: @bill.bill_id).present? %>
     
       <%= link_to favorites_remove_two_path(@bill), method: "delete", class: "btn btn-default btn-unsave" do %>
         Unsave

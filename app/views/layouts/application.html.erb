@@ -37,17 +37,30 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Search", searches_search_path %></li>
-        <li><%= link_to "My Bills", users_show_path %></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li><a href="#"> About</a></li>
+        <% if current_user %>
+          <li><%= link_to "My Bills", users_show_path %></li>
+        <% end %>
+        <% if !current_user %>
+          <li><%= link_to new_user_session_path do %>
+            <span class="glyphicon glyphicon-log-in"></span> Login
+            <% end %>
+          </li>
+        <% else %>
+          <li><%= link_to destroy_user_session_path do %>
+            <span class="glyphicon glyphicon-log-out"></span> Logout
+            <% end %>
+          </li>      
+        <% end %>
+        <li><%= link_to "About", welcome_about_path %></li>
       </ul>
     </div>
   </div>
 </nav>
     
     
-<div class="container" style="border:1px solid black;">
-  <div class="row justify-content-md-center">
+<div class="container">
+  <!--style="border:1px solid black;"-->
+  <!--<div class="row justify-content-md-center">-->
       
         <% if flash[:notice] %>
             <div class="alert alert-success wrap">
@@ -61,12 +74,12 @@
             </div>
          <% end %>
       
-      <div class="col-md-12" style="border:1px solid black;">
+
+        <!--style="border:1px solid black;"-->
          
           
         <%= yield %>
         
-      </div>
     </div>
 </div>
 

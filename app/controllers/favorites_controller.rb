@@ -1,5 +1,8 @@
 class FavoritesController < ApplicationController
     skip_before_filter :verify_authenticity_token
+
+    before_action :authenticate_user_fav, only: [:create, :destroy] 
+    
     include HTTParty
     
     def show
@@ -63,5 +66,14 @@ class FavoritesController < ApplicationController
             redirect_to searches_search_path
         end
     end 
+    
+    private 
+
+    def authenticate_user_fav 
+        if !current_user
+            flash[:alert] = "You need to be logged in to save bills."
+            redirect_to searches_search_path
+        end 
+    end
     
 end

@@ -20,7 +20,9 @@ class SearchesController < ApplicationController
                 
             if !@response.nil?
                 
-                clear_old_search
+                # if current_user
+                    clear_old_search
+                # end 
                 
                 @response.each do |bill|
                     @bill  = Bill.new(
@@ -34,8 +36,10 @@ class SearchesController < ApplicationController
                     #   status: bill['active'],
                        link: bill['congressdotgov_url']
                     )
-                    @bill.user = current_user
-                    @bill.save
+                    # if current_user 
+                        @bill.user = current_user
+                        @bill.save
+                    # end 
                 end
             end
             redirect_to request.path
