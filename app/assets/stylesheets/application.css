@@ -26,6 +26,24 @@ h6 {
     letter-spacing: .5px !important;
 }
 
+h2, h5 {
+    color: #e6902a !important;
+    margin-top: 0 !important;
+}
+
+h5 {
+    font-weight: 700 !important;
+}
+
+.page-row {
+    margin-top: 10px;
+}
+
+.bill-link {
+    text-decoration: underline;
+}
+
+
 .auth {
     font-family: 'Archivo', sans-serif;
     letter-spacing: .5px;
@@ -43,7 +61,7 @@ h6 {
 }
 
 .col-width div.auth {
-    /*max-width:225px;*/
+    max-width:225px;
     width: 225px;
 }
 
@@ -56,6 +74,24 @@ h6 {
         border-right: 2px solid #E0E0E0;
         min-width: 315px;
         margin-right: 15px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #history {
+        display: none;
+    }
+    #historyTog {
+        display: none;
+    }
+    #historyTogSm {
+        display: visible;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    #historyTogSm {
+        display: none;
     }
 }
 
@@ -82,3 +118,4 @@ h6 {
     .mid-field {
         margin-right: 25px;
     }
+}    

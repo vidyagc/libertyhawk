@@ -14,6 +14,9 @@ end
 post 'favorites/create' => 'favorites#create'
 delete 'favorites/remove' => 'favorites#destroy'
 get 'bill' => 'searches#show'
+get 'favorite' => 'favorites#show'
+get 'users/search' => 'searches#search'
+
 delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
 
   # as :user do

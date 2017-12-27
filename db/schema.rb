@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217185552) do
+ActiveRecord::Schema.define(version: 20171226021208) do
+
+  create_table "actions", force: :cascade do |t|
+    t.integer  "action_id"
+    t.string   "chamber"
+    t.string   "action_type"
+    t.string   "date"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "bills", force: :cascade do |t|
     t.string   "bill_id"
@@ -25,6 +35,7 @@ ActiveRecord::Schema.define(version: 20171217185552) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "user_id"
+    t.boolean  "status"
   end
 
   add_index "bills", ["user_id"], name: "index_bills_on_user_id"
@@ -41,6 +52,7 @@ ActiveRecord::Schema.define(version: 20171217185552) do
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.boolean  "status"
   end
 
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
@@ -84,5 +96,20 @@ ActiveRecord::Schema.define(version: 20171217185552) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: :cascade do |t|
+    t.string   "chamber"
+    t.string   "date"
+    t.string   "time"
+    t.string   "roll_call"
+    t.string   "question"
+    t.string   "result"
+    t.integer  "yea"
+    t.integer  "nay"
+    t.integer  "not_voting"
+    t.string   "api_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chamber: MyString
+  date: MyString
+  time: MyString
+  roll_call: MyString
+  question: MyString
+  result: MyString
+  yea: 1
+  nay: 1
+  not_voting: 1
+  api_url: MyString
+
+two:
+  chamber: MyString
+  date: MyString
+  time: MyString
+  roll_call: MyString
+  question: MyString
+  result: MyString
+  yea: 1
+  nay: 1
+  not_voting: 1
+  api_url: MyString

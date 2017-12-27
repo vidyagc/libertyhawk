@@ -1,4 +1,84 @@
-<%= @bill.title %>
+<div class="container">
+<div class="row page-row">
 
-<h5><b><u>Summary</u></b></h5>
-<%= @bill.summary %><p></p>
+<h5>Title</h5>
+<p><%= @bill.title %></p>
+
+<% if @bill.summary != "" %>
+<h5>Summary</h5>
+<p><%= @bill.summary %></p>
+<% end %>
+
+<div>
+ <div style="float: left; margin-right:20px">
+    <h5>Status</h5>
+      <% if @bill.status == true %>
+        <td><i class="fa fa-toggle-on" aria-hidden="true" style="color:#00b900; margin-right:7px"></i>Active</td>
+      <% else %>
+        <td><i class="fa fa-toggle-off" aria-hidden="true" style="margin-right:7px"></i>Not Active</td>
+      <% end %>
+ </div>
+ <div style="float: left;">
+    <h5>Sponsor</h5>
+    <b><%= @bill.sponsor_party %></b>, <%= @bill.sponsor %> - <%= @bill.sponsor_state %>
+ </div>
+    <br style="clear: left;" />
+</div>
+
+<%= render 'favorites/newslim', bill: @bill, rdpath: bill_path(@bill) %><p></p>
+</div>
+
+<div class="row page-row">
+  
+<div class="col-md-3">
+    
+<% @actions.each do |action| %>
+        
+<table class="search-layout">
+  <tr>
+    <td>Chamber:</td>
+    <td><%= action.chamber %></td>
+  </tr>
+  <tr>
+    <td>Action Type:</td>
+    <td><%= action.action_type %></td>
+  </tr>
+  <tr>
+    <td>Date:</td>
+    <td><%= action.date %></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><%= action.description %></td>
+  </tr>
+</table> 
+<p>&nbsp;</p>
+<% end %>
+</div>
+
+<div class="col-md-3">
+<% @votes.each do |vote| %>
+        
+<table class="search-layout">
+  <tr>
+    <td>Chamber:</td>
+    <td><%= vote.chamber %></td>
+  </tr>
+  <tr>
+    <td>Date:</td>
+    <td><%= vote.date %></td>
+  </tr>
+  <tr>
+    <td>Question:</td>
+    <td><%= vote.question %></td>
+  </tr>
+  <tr>
+    <td>Result:</td>
+    <td><%= vote.result %></td>
+  </tr>
+</table> 
+<p>&nbsp;</p>
+<% end %>
+</div>
+
+</div>

@@ -1,9 +1,24 @@
-<h2>My Research</h2>
+<div class="container">
+<div class="row page-row">
 
-<% @user.favorites.each do |favorite| %>
-
-    <%= favorite.title %><p></p>
+    <div class="col-md-4 col-md-push-8">
     
-    <%= render 'favorites/remove', favorite: favorite %><p></p>
+        <%= render 'searches/form' %>
 
-<% end %>
+    </div>
+
+    <div class="col-md-8 col-md-pull-4">
+        <h2>Saved Bills</h2>
+
+        <% @user.favorites.each do |favorite| %>
+        
+            <%= link_to favorite.title, favorite_path(:format => favorite.id), class: "bill-link" %><p></p>
+        
+            <%= render 'favorites/remove', favorite: favorite %><p></p>
+        
+        <% end %>
+
+    </div>
+
+</div>
+</div>

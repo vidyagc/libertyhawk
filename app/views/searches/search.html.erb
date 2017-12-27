@@ -1,13 +1,41 @@
-<%= render 'form' %>
-<p></p>
+<div class="container">
+<div class="row page-row">
 
-<% if current_user && current_user.bills %>
-    <% current_user.bills.each do |bill| %>
-    
-        <%= render 'favorites/new', bill: bill %><p></p>
-    
-    <% end %>
-<% end %>
+    <div class="col-md-4 col-md-push-8">
+        <%= render 'form' %>
+    </div>
+
+    <div class="col-md-8 col-md-pull-4">
+        <% if !current_user.bills.first.nil? %>
+            <h2>Search Results</h2>
+        <% end %>
+
+        <% if current_user && current_user.bills %>
+        <!-- @bills = current_user.bills.helpermethod (e.g. sort_by {|bill| bill.title} 
+        when dropdown is used - onclick for dropdown that calls this helper method? try a helper method with a dropdown, then try this 
+        Need to refresh page? Could helper method do that? -->
+        
+            <% current_user.bills.each do |bill| %>
+            
+                <%= render 'favorites/new', bill: bill, rdpath: searches_search_path %><p></p>
+            
+            <% end %>
+        
+        <!-- code for not signed in user -->
+        <% else %>
+            <% if @tempBills %>
+                <% @tempBills.each do |bill| %>
+                
+                    <%= render 'favorites/new', bill: bill %><p></p>
+                
+                <% end %>
+            <% end %>
+            
+        <!-- end code for not signed in user -->
+            
+        <% end %>
 
 <!-- consider pagination for results -->
-
+    </div>
+</div>
+</div>

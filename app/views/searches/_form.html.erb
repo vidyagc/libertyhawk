@@ -1,9 +1,42 @@
-<p></p>
 <form action="search" accept-charset="UTF-8" method="get">
-  <div class="col-xs-3 nopadding">
-    <input type="text" name="subject" class="form-control" />
-  </div>
+  <!--controller="searches"-->
+  
   <div class="form-group">
-    <input type="submit" name="Search" value="Search" class="btn btn-basic" />
+    
+    <table>
+      <tr>
+        <td><input type="text" name="subject" class="form-control" style="min-width:225px;" /></td>
+        <td>
+          <button type="submit" name="Search" value="Search" class="btn btn-basic" style="margin: 0 10px 0 10px;">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  
   </div>
 </form>
+
+<% if !current_user.bills.first.nil? %>
+  <div class="panel panel-default" style="max-width: 350px">
+    <div class="panel-heading">
+      <div id="historyTog" onclick="toggleHistory()">Hide last 10 searches</div>
+      <div id="historyTogSm" onclick="toggleHistory()">Show last 10 searches</div>
+    </div>
+    <div class="panel-body">
+      <div id="history">
+        <% current_user.searches.each do |search| %>
+    
+          <p><%= link_to controller: "searches", action: "search", method: "get", subject: search.metadata do %>
+            <%= search.metadata %>
+          <% end %></p>
+              
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- https://www.youtube.com/watch?v=FWIXWutlxIg 
+putting dropdown in form 
+could use form_tag vs form_for cuz it's not fields tied to attributes -->
