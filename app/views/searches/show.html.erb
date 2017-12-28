@@ -1,5 +1,6 @@
 <div class="container">
 <div class="row page-row">
+<div class="col-md-12">
 
 <h5>Title</h5>
 <p><%= @bill.title %></p>
@@ -27,20 +28,24 @@
 
 <%= render 'favorites/newslim', bill: @bill, rdpath: bill_path(@bill) %><p></p>
 </div>
+</div>
 
 <div class="row page-row">
   
-<div class="col-md-3">
-    
+<div class="col-md-4 col-sm-6">
+
+<h5>Actions</h5>    
 <% @actions.each do |action| %>
         
-<table class="search-layout">
+<table class="search-layout bill-layout">
+  <% if action.chamber != nil %>
   <tr>
     <td>Chamber:</td>
     <td><%= action.chamber %></td>
   </tr>
+  <% end %>
   <tr>
-    <td>Action Type:</td>
+    <td>Type:</td>
     <td><%= action.action_type %></td>
   </tr>
   <tr>
@@ -51,16 +56,19 @@
     <td>Description:</td>
     <td><%= action.description %></td>
   </tr>
+  <tr><hr></tr>
 </table> 
-<p>&nbsp;</p>
 <% end %>
 </div>
 
-<div class="col-md-3">
+<div class="col-md-4 col-sm-6">
+<% if @votes.first != nil %>
+<h5>Votes</h5> 
+<% end %>
 <% @votes.each do |vote| %>
         
-<table class="search-layout">
-  <tr>
+<table class="search-layout bill-layout">
+  <tr class="top-row">
     <td>Chamber:</td>
     <td><%= vote.chamber %></td>
   </tr>
@@ -76,9 +84,14 @@
     <td>Result:</td>
     <td><%= vote.result %></td>
   </tr>
+  <tr><hr></tr>
 </table> 
-<p>&nbsp;</p>
 <% end %>
+</div>
+
+<div class="col-md-4">
+  <!-- in small screens, where should this go? Top, bottom, or new page? -->
+  Google News Search
 </div>
 
 </div>

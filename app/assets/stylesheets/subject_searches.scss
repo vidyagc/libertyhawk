@@ -24,6 +24,20 @@
 .search-layout td { 
     padding-right: 15px;
     padding-top: 5px;
+    vertical-align: top;
+}
+
+.historyToggle {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bill-layout {
+    margin-bottom: 15px;
+}
+
+.bill-layout tr:first-child td {
+    padding-top: 0 !important;
 }
 
 .btn-basic {

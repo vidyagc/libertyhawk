@@ -16,9 +16,8 @@
   </tr>
 </table>
 
-
 <%= form_tag url_for(:controller => "favorites", :action => "create"), :method => :POST do %>
- <div class="form-group">
+ <div class="form-group" style="margin-bottom: 20px">
     <%= hidden_field_tag :rdpath , local_assigns[:rdpath]  %>
     <%= hidden_field_tag :id , @bill.id %>
 

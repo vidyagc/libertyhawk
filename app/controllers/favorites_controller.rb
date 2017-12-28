@@ -63,7 +63,7 @@ class FavoritesController < ApplicationController
             sponsor: @bill.sponsor,
             sponsor_state: @bill.sponsor_state,
             sponsor_party: @bill.sponsor_party,
-            # status: @bill.status,
+            status: @bill.status,
             link: @bill.link
         )
         @favorite.user = current_user

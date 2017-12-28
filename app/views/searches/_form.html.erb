@@ -20,15 +20,15 @@
 <% if !current_user.bills.first.nil? %>
   <div class="panel panel-default" style="max-width: 350px">
     <div class="panel-heading">
-      <div id="historyTog" onclick="toggleHistory()">Hide last 10 searches</div>
-      <div id="historyTogSm" onclick="toggleHistory()">Show last 10 searches</div>
+      <div id="historyTog" onclick="toggleHistory()">Hide Last 10 searches</div>
+      <div id="historyTogSm" onclick="toggleHistory()">ShowLast 10 searches</div>
     </div>
     <div class="panel-body">
       <div id="history">
         <% current_user.searches.each do |search| %>
     
           <p><%= link_to controller: "searches", action: "search", method: "get", subject: search.metadata do %>
-            <%= search.metadata %>
+            <u><%= search.metadata %></u>
           <% end %></p>
               
         <% end %>
