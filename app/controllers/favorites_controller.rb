@@ -29,13 +29,13 @@ class FavoritesController < ApplicationController
         
         @votes = []
         @response['votes'].each do |vote|
-            @latest_action = HTTParty.get(vote['api_url'], headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results']['votes']['vote']['bill']['latest_action']
+            @description = HTTParty.get(vote['api_url'], headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results']['votes']['vote']['description']
             @vote  = Vote.new(
                 chamber: vote['chamber'],
                 date: vote['date'],
                 time: vote['time'],
                 roll_call: vote['roll_call'],
-                question: vote['question']+"\n"+"LATEST ACTION:"+"\n"+@latest_action,
+                question: vote['question']+"<br><u>Description</u><br>"+@description,
                 # vote['question'],
                 result: vote['result'],
                 yea: vote['total_yes'],
@@ -53,7 +53,6 @@ class FavoritesController < ApplicationController
     def create
 
         @bill = Bill.find(params[:id])
-                # raise params.inspect
                 
         @favorite  = Favorite.new(
             bill_id: @bill.bill_id,
@@ -78,11 +77,7 @@ class FavoritesController < ApplicationController
             end 
         end
 
-        if params[:page]==1
-            redirect_to searches_search_path
-        else 
-            redirect_to params[:rdpath]
-        end 
+        redirect_to params[:rdpath]
    end 
     
     def destroy
@@ -90,7 +85,7 @@ class FavoritesController < ApplicationController
         @favorite = Favorite.find(params[:id])
         
         if @favorite.destroy
-            # flash[:notice] = "Bill was deleted."
+            # flash[:notice] = "Bill was deleted from your saved bills."
             redirect_to users_show_path
         else
             flash[:alert] = "Bill couldn't be deleted. Try again."
@@ -101,13 +96,12 @@ class FavoritesController < ApplicationController
     def destroy_search_bill
         @bill = Bill.find(params[:format])
         @favorite = Favorite.where(bill_id: @bill.bill_id).first
-        # raise params.inspect
         if @favorite.destroy
             # flash[:notice] = "Bill was deleted from your saved bills."
-            redirect_to searches_search_path
+            redirect_to params[:rdpath]
         else
             flash[:alert] = "Bill couldn't be deleted. Try again."
-            redirect_to searches_search_path
+            redirect_to params[:rdpath]
         end
     end 
     

@@ -8,6 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     
@@ -37,7 +39,33 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Search", searches_search_path %></li>
+          <% if !user_signed_in? %>
+        <li style="padding-top: 5px">
+          <form action="search" accept-charset="UTF-8" method="get">
+  <!--controller="searches"-->
+
+  <div class="form-group">
+    
+    <table>
+      <tr>
+        <td><input type="text" name="subject" class="form-control input-sm" style="min-width:225px;" /></td>
+        <td>
+
+          <button type="submit" name="Search" value="Search" class="btn btn-basic btn-sm" style="margin: 0 10px 0 10px;">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  
+  </div>
+</form>
+</li>
+       <% else %>   
+     <li>
+          <%= link_to "Search", searches_search_path %>
+          <% end %>
+          </li>
         <% if current_user %>
           <li><%= link_to "Favorites", users_show_path %></li>
         <% end %>
@@ -68,37 +96,54 @@
                <button type="button" class="close" data-dismiss="alert">&times;</button>
                <%= flash[:notice] %>
              </div>
-         <% elsif flash[:alert] %>
+         <% elsif flash[:danger] %>
             <div class="alert alert-warning wrap">
                <button type="button" class="close" data-dismiss="alert">&times;</button>
-               <%= flash[:alert] %>
+               <%= flash[:danger] %>
             </div>
          <% end %>
       
-
         <!--style="border:1px solid black;"-->
-         
           
         <%= yield %>
-        
+
     </div>
 </div>
 
 <script>
+
+
+function lastWord () {
+	$('div.historyToggle').html(function(){	
+		// separate the text by spaces
+		var text= $(this).text().split(' ');
+		// drop the last word and store it in a variable
+		var last = text.pop();
+		// alert(last);
+		// join the text back and if it has more than 1 word add the span tag
+		// to the last word
+		return text.join(" ") + (text.length > 0 ? ' <p class="last" style="float:right" onclick="toggleHistory();">'+last+'</p>' : last);   
+	});
+}
+
 function toggleHistory() {
     var x = document.getElementById("history");
     var y = document.getElementById("historyTog");
     var z = document.getElementById("historyTogSm");
     if (x.style.display === "none") {
         x.style.display = "block";
-        y.textContent="Hide last 10 searches";
-        z.textContent="Hide last 10 searches";
+        y.textContent="Last 10 searches Hide";
+        z.textContent="Last 10 searches Hide";
     } else {
         x.style.display = "none";
-        y.textContent="Show last 10 searches";
-        z.textContent="Show last 10 searches";
+        y.textContent="Last 10 searches Show";
+        z.textContent="Last 10 searches Show";
     }
+		
+  lastWord();
 }
+
+jQuery(document).ready(lastWord());
 
 </script>
 

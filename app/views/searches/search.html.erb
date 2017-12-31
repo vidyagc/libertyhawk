@@ -1,21 +1,59 @@
+<% params[:saveAlert] == false %>
 <div class="container">
 <div class="row page-row">
-
+    
     <div class="col-md-4 col-md-push-8">
         <%= render 'form' %>
     </div>
 
+          <p>
+            
+            <% form_tag url_for(:action => 'sort'), :method => :GET do %>
+              <div>
+                <label>Sort By:</label>
+                <%= select_tag(:status, options_for_select([["relavance, Relevance"], ["title, Title"]]), :onchange => "this.form.submit()") %>
+              </div>    
+            <% end %>
+
+          </p>
+
     <div class="col-md-8 col-md-pull-4">
-        <% if !current_user.bills.first.nil? %>
+   
+        <% if current_user && !current_user.bills.first.nil? %>
+            
             <h2>Search Results</h2>
+            
+            <div style="max-width: 120px">
+            <p style="float: right;">
+            <form id="sort_type" action="sort" method="get" class="form-group">Sort By
+                <select name="sort_type" form="sort_type" onchange="this.form.submit()" class="form-control" style="padding: 0 0 0 4px !important;">
+                    <option value="default">Default</option>
+                    <option value="title" <% if current_user.sort == "title" %> selected <% end %>>Title</option>
+                    <option value="active" <% if current_user.sort == "active" %> selected <% end %>>Active Status</option>
+                    <option value="date" <% if current_user.sort == "date" %> selected <% end %> >Date Introduced</option>
+                </select>
+            </form>
+            </p>
+            </div>
+            
         <% end %>
 
         <% if current_user && current_user.bills %>
         <!-- @bills = current_user.bills.helpermethod (e.g. sort_by {|bill| bill.title} 
         when dropdown is used - onclick for dropdown that calls this helper method? try a helper method with a dropdown, then try this 
         Need to refresh page? Could helper method do that? -->
-        
-            <% current_user.bills.each do |bill| %>
+            
+            <% if current_user.sort == "title" %>
+                <% @bills = current_user.bills.sort_by {|bill| bill.title} %>
+            <% elsif current_user.sort == "active" %>
+                <% @bills = current_user.bills.sort_by {|bill| bill.status ? 0 : 1} %>
+            <% elsif current_user.sort == "date" %>
+                <% @bills = current_user.bills.sort_by {|bill| bill.date} %>   
+            <% else %>
+                <% @bills = current_user.bills %>
+            <% end %>
+            
+            <% @bills.each do |bill| %>
             
                 <%= render 'favorites/new', bill: bill, rdpath: searches_search_path %>
             
@@ -26,7 +64,7 @@
             <% if @tempBills %>
                 <% @tempBills.each do |bill| %>
                 
-                    <%= render 'favorites/new', bill: bill %><p></p>
+                    <%= render 'favorites/tempNew', bill: bill %><p></p>
                 
                 <% end %>
             <% end %>

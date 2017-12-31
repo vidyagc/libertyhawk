@@ -1,12 +1,13 @@
 <form action="search" accept-charset="UTF-8" method="get">
   <!--controller="searches"-->
-  
+
   <div class="form-group">
     
     <table>
       <tr>
         <td><input type="text" name="subject" class="form-control" style="min-width:225px;" /></td>
         <td>
+
           <button type="submit" name="Search" value="Search" class="btn btn-basic" style="margin: 0 10px 0 10px;">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
@@ -17,20 +18,27 @@
   </div>
 </form>
 
-<% if !current_user.bills.first.nil? %>
+<% if current_user && !current_user.bills.first.nil? %>
   <div class="panel panel-default" style="max-width: 350px">
     <div class="panel-heading">
-      <div id="historyTog" onclick="toggleHistory()">Hide Last 10 searches</div>
-      <div id="historyTogSm" onclick="toggleHistory()">ShowLast 10 searches</div>
+      <div id="historyTog" class="historyToggle">Last 10 searches Hide</div>
+      <div id="historyTogSm" class="historyToggle">Last 10 searches Show</div>
     </div>
     <div class="panel-body">
       <div id="history">
-        <% current_user.searches.each do |search| %>
+        <% current_user.searches.order('created_at DESC').each do |search| %>
     
-          <p><%= link_to controller: "searches", action: "search", method: "get", subject: search.metadata do %>
-            <u><%= search.metadata %></u>
-          <% end %></p>
-              
+          <table width="100%">
+            <tr>
+              <td align="left">
+                <%= link_to controller: "searches", action: "search", method: "get", subject: search.metadata do %><u><%= search.metadata %></u><% end %>
+              </td>
+              <td align="right">
+                <%= search.created_at.to_date %>
+              </td>
+            </tr>
+          </table>
+
         <% end %>
       </div>
     </div>

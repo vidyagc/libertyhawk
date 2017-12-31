@@ -1,3 +1,14 @@
+<% if params[:saveAlert] == "true" %>
+  <% flash.alert = "Sign in or sign up to save bills" %>
+<% end %>
+
+        <% if flash[:alert] %>
+            <div class="alert alert-warning wrap">
+               <button type="button" class="close" data-dismiss="alert">&times;</button>
+               <%= flash[:alert] %>
+             </div>
+        <% end %>
+
 <div class="row col-width">
 
   <div class="col-md-3 col-sm-12 login-border" style="">

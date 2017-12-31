@@ -14,6 +14,10 @@
     <td>Sponsor:</td>
     <td><b><%= @bill.sponsor_party %></b>, <%= @bill.sponsor %> - <%= @bill.sponsor_state %></td>
   </tr>
+  <tr>
+    <td>Introduced:</td>
+    <td><%= @bill.date.to_date.strftime("%B, %d, %Y") %></td>
+  </tr>
 </table>
 
 <%= form_tag url_for(:controller => "favorites", :action => "create"), :method => :POST do %>
@@ -28,7 +32,7 @@
     <% else %>
         <% if current_user.favorites.where(bill_id: @bill.bill_id).present? %>
         
-          <%= link_to favorites_remove_two_path(@bill), method: "delete", class: "btn btn-default btn-unsave" do %>
+          <%= link_to favorites_remove_two_path(@bill, rdpath: searches_search_path), method: "delete", class: "btn btn-default btn-unsave" do %>
             Unsave
           <% end %>
     

@@ -25,8 +25,13 @@ delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
   # end
   
   get 'searches/', to: 'searches#index'
-
+  
+  get 'searches/sort', to: 'searches#sort'
   get 'searches/search', to: 'searches#search'
+  get '*a/search', to: 'searches#search'
+  get '/search', to: 'searches#search'
+  
+  get 'sort', to: 'searches#sort' 
 
 # post 'searches/create', to: 'searches#create'
   

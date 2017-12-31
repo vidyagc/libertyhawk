@@ -3,18 +3,46 @@ class SearchesController < ApplicationController
     skip_before_filter :verify_authenticity_token
     
     def index
+    end 
 
+    def sort
+        current_user.update(:sort => params[:sort_type])
+
+        redirect_to searches_search_path
     end 
 
     def show
 
-        @bill = Bill.find(params[:format]) 
+        if user_signed_in?
+            @bill = Bill.find(params[:format]) 
+
+            # raise @bill.inspect
+            bill_slug = @bill.bill_id.split('-')[0]
+            congress = @bill.bill_id.split('-')[1]
         
-        bill_slug = @bill.bill_id.split('-')[0]
-        congress = @bill.bill_id.split('-')[1]
+        else
+            bill_slug = params[:bill_id].split('-')[0]
+            congress = params[:bill_id].split('-')[1]
+            # create new bill and get params for that bill as do for temp bill in search - then will be able to display on that page with @bill?
+        end 
+        
         @response = HTTParty.get('https://api.propublica.org/congress/v1/'+congress+'/bills/'+bill_slug+'.json', headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results'][0]
         
         @status = @response['active']
+        
+        if !user_signed_in?
+            @bill  = Bill.new(
+               bill_id: @response['bill_id'],
+               title: @response['short_title'],
+               summary: @response['summary'],
+               date: @response['introduced_date'],
+               sponsor: @response['sponsor_name'],
+               sponsor_state: @response['sponsor_state'],
+               sponsor_party: @response['sponsor_party'],
+               status: @response['active'],
+               link: @response['congressdotgov_url']
+            )
+        end 
         
         @bill.status = @status
         
@@ -32,13 +60,13 @@ class SearchesController < ApplicationController
         
         @votes = []
         @response['votes'].each do |vote|
-            @latest_action = HTTParty.get(vote['api_url'], headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results']['votes']['vote']['bill']['latest_action']
+            @description = HTTParty.get(vote['api_url'], headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results']['votes']['vote']['description']
             @vote  = Vote.new(
                 chamber: vote['chamber'],
                 date: vote['date'],
                 time: vote['time'],
                 roll_call: vote['roll_call'],
-                question: vote['question']+"\n"+"LATEST ACTION:"+"\n"+@latest_action,
+                question: vote['question']+"<br><u>Description</u><br>"+@description,
                 # vote['question'],
                 result: vote['result'],
                 yea: vote['total_yes'],
@@ -49,12 +77,14 @@ class SearchesController < ApplicationController
             @votes << @vote
         end 
         
+        # @actions = @actions.sort_by {|action| action.action_type} WORKS
+        
         rescue ActiveRecord::RecordNotFound
         redirect_to searches_search_path, :flash => { :alert => "Record not found." }
     end 
 
     def search
-        if !params['subject'].nil? 
+        if params['subject'].present? 
             @response = HTTParty.get('https://api.propublica.org/congress/v1/bills/search.json?query='+params['subject'], headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results'].first['bills']
                 # raise @response.inspect
             if @response.any?
@@ -68,8 +98,8 @@ class SearchesController < ApplicationController
                     metadata: params['subject']
                 )
                 @search.user = current_user
-                @search.save
-                if current_user.searches.count > 10 
+                @search.save  
+                if current_user && current_user.searches.count > 10 
                     @lastSearch = current_user.searches.first
                     @lastSearch.destroy 
                 end 
@@ -89,14 +119,20 @@ class SearchesController < ApplicationController
                     if user_signed_in? 
                         @bill.user = current_user
                         @bill.save
-                    else 
+                    else
                         @tempBills << @bill
                     end 
                 end
             else 
                 # error message for no result search - add to bills error array and put in header, like in Wikit
             end
-            redirect_to request.path
+            # raise @tempBills.inspect
+            if user_signed_in?
+                # raise params[:rdpath]
+                redirect_to request.path
+            # else 
+            #     redirect_to searches_search_path
+            end 
         end
     end 
 
@@ -105,6 +141,7 @@ private
     def clear_old_search
         @user = User.find(current_user.id)
         @bills = @user.bills
+        current_user.sort=nil
         
         if !@bills[0].nil?
             @bills.each do |bill|
