@@ -15,7 +15,6 @@ post 'favorites/create' => 'favorites#create'
 delete 'favorites/remove' => 'favorites#destroy'
 get 'bill' => 'searches#show'
 get 'favorite' => 'favorites#show'
-get 'users/search' => 'searches#search'
 
 delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
 
@@ -28,14 +27,15 @@ delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
   
   get 'searches/sort', to: 'searches#sort'
   get 'searches/search', to: 'searches#search'
-  get '*a/search', to: 'searches#search'
+  
+  # these are causing possible problems for when users are logged in and accidentally go to these routes (other action calls on search results page break).
+  # need to add constraints... have a partial there instead of search box by itself? not sure that would work. Find way to have conditional, that routes don't 
+  # exist if user signed in
+  
+  get '/welcome/search', to: 'searches#search'
   get '/search', to: 'searches#search'
   
   get 'sort', to: 'searches#sort' 
-
-# post 'searches/create', to: 'searches#create'
-  
-  # get "/users/sign_out"
   
   get 'welcome/index'
 

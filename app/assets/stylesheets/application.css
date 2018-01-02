@@ -29,10 +29,71 @@ h6 {
 h2, h5 {
     color: #e6902a !important;
     margin-top: 0 !important;
+    /*display: inline-block;*/
 }
 
 h5 {
     font-weight: 700 !important;
+}
+
+.fa-toggle-on {
+    color:#00b900; 
+    margin-right:7px;
+}
+
+.fa-toggle-off {
+    margin-right:7px;
+}
+
+@media screen and (max-width: 768px) {
+    #large {
+        display: none;
+    }
+    #med {
+        display: visible;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    #large {
+        display: visible;
+    }
+    #med {
+        display: none;
+    }
+}
+
+.logo-info {
+    background: url(hawk-border.png) no-repeat;
+    background-position: center;
+    width:300px; 
+    height:175px;
+    padding-left: 130px;
+    padding-top: 15px;
+}
+
+.logo-info .fa-star {
+    padding-right:5px; 
+    color:#d56367;
+}
+
+div.logo-info tr {
+    vertical-align:top;
+}
+
+div.logo-info tr:nth-child(3) {
+    text-align: center;
+}
+
+div.logo-info tr:nth-child(3) td:last-child {
+    padding-top: 10px; 
+    padding-right: 20px;
+}
+
+div.logo-info p {
+    color:#d56367;
+    font-weight: bold;
+    letter-spacing: .1px;
 }
 
 .page-row {
@@ -48,7 +109,6 @@ h5 {
     font-family: 'Archivo', sans-serif;
     letter-spacing: .5px;
     font-weight: normal;
-    /*background-color: pink;*/
 }
 
 .col-centered{

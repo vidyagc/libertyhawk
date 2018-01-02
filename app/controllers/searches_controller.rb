@@ -7,23 +7,19 @@ class SearchesController < ApplicationController
 
     def sort
         current_user.update(:sort => params[:sort_type])
-
         redirect_to searches_search_path
     end 
 
     def show
-
         if user_signed_in?
             @bill = Bill.find(params[:format]) 
 
-            # raise @bill.inspect
             bill_slug = @bill.bill_id.split('-')[0]
             congress = @bill.bill_id.split('-')[1]
         
         else
             bill_slug = params[:bill_id].split('-')[0]
             congress = params[:bill_id].split('-')[1]
-            # create new bill and get params for that bill as do for temp bill in search - then will be able to display on that page with @bill?
         end 
         
         @response = HTTParty.get('https://api.propublica.org/congress/v1/'+congress+'/bills/'+bill_slug+'.json', headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results'][0]
@@ -40,7 +36,7 @@ class SearchesController < ApplicationController
                sponsor_state: @response['sponsor_state'],
                sponsor_party: @response['sponsor_party'],
                status: @response['active'],
-               link: @response['congressdotgov_url']
+               link: '<script id="govtrack:widget:bill:'+congress+':'+bill_slug+':script" src="https://www.govtrack.us/congress/bills/'+congress+'/'+bill_slug+'/widget.js" type="text/javascript"></script>'
             )
         end 
         
@@ -77,8 +73,6 @@ class SearchesController < ApplicationController
             @votes << @vote
         end 
         
-        # @actions = @actions.sort_by {|action| action.action_type} WORKS
-        
         rescue ActiveRecord::RecordNotFound
         redirect_to searches_search_path, :flash => { :alert => "Record not found." }
     end 
@@ -105,6 +99,8 @@ class SearchesController < ApplicationController
                 end 
                 
                 @response.each do |bill|
+                    bill_slug = bill['bill_id'].split('-')[0]
+                    congress = bill['bill_id'].split('-')[1]
                     @bill  = Bill.new(
                        bill_id: bill['bill_id'],
                        title: bill['short_title'],
@@ -114,7 +110,7 @@ class SearchesController < ApplicationController
                        sponsor_state: bill['sponsor_state'],
                        sponsor_party: bill['sponsor_party'],
                        status: bill['active'],
-                       link: bill['congressdotgov_url']
+                       link: '<script id="govtrack:widget:bill:'+congress+':'+bill_slug+':script" src="https://www.govtrack.us/congress/bills/'+congress+'/'+bill_slug+'/widget.js" type="text/javascript"></script>'
                     )
                     if user_signed_in? 
                         @bill.user = current_user
@@ -124,14 +120,16 @@ class SearchesController < ApplicationController
                     end 
                 end
             else 
-                # error message for no result search - add to bills error array and put in header, like in Wikit
+                if !user_signed_in?
+                    redirect_to root_path, :flash => { :alert2 => "Your search yielded no results." }
+                else 
+                    redirect_to request.path, :flash => { :alert2 => "Your search yielded no results." }
+                    clear_old_search
+                    return 
+                end 
             end
-            # raise @tempBills.inspect
             if user_signed_in?
-                # raise params[:rdpath]
-                redirect_to request.path
-            # else 
-            #     redirect_to searches_search_path
+                redirect_to searches_search_path
             end 
         end
     end 

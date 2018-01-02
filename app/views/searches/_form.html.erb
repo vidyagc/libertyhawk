@@ -1,28 +1,26 @@
-<form action="search" accept-charset="UTF-8" method="get">
-  <!--controller="searches"-->
-
-  <div class="form-group">
-    
-    <table>
-      <tr>
-        <td><input type="text" name="subject" class="form-control" style="min-width:225px;" /></td>
-        <td>
-
-          <button type="submit" name="Search" value="Search" class="btn btn-basic" style="margin: 0 10px 0 10px;">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
+<% if user_signed_in? %>
+  <form action="search" accept-charset="UTF-8" method="get">
   
-  </div>
-</form>
+    <div class="form-group">
+      <table>
+        <tr>
+          <td><input type="text" name="subject" class="form-control" style="min-width:225px;" /></td>
+          <td>
+            <button type="submit" name="Search" value="Search" class="btn btn-basic" style="margin: 0 10px 0 10px;">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+<% end %>
 
-<% if current_user && !current_user.bills.first.nil? %>
+<% if user_signed_in? && !current_user.searches.first.nil? %>
   <div class="panel panel-default" style="max-width: 350px">
     <div class="panel-heading">
-      <div id="historyTog" class="historyToggle">Last 10 searches Hide</div>
-      <div id="historyTogSm" class="historyToggle">Last 10 searches Show</div>
+      <div id="historyTog" class="historyHeader">Last 10 searches Hide</div>
+      <div id="historyTogSm" class="historyHeader">Last 10 searches Show</div>
     </div>
     <div class="panel-body">
       <div id="history">
@@ -45,6 +43,26 @@
   </div>
 <% end %>
 
-<!-- https://www.youtube.com/watch?v=FWIXWutlxIg 
-putting dropdown in form 
-could use form_tag vs form_for cuz it's not fields tied to attributes -->
+<% if !user_signed_in? %>
+  <div class="logo-info">
+    <p>ACCOUNT BENEFITS</p>
+    <table>
+      <tr>
+        <td><i class="fa fa-star" aria-hidden="true"></i></td>
+        <td>Save searched bills</td>
+      </tr>
+      <tr>
+        <td><i class="fa fa-star" aria-hidden="true"></i></td>
+        <td>Access your last ten searches</td>
+      </tr>
+        <tr>
+        <td colspan="2">
+          <%= link_to new_user_session_path do %>
+            <button type="button" class="btn btn-info btn-sm" id="btn-signup">Sign In or Sign Up</button>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+

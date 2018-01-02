@@ -14,6 +14,7 @@ class FavoritesController < ApplicationController
         @response = HTTParty.get('https://api.propublica.org/congress/v1/'+congress+'/bills/'+bill_slug+'.json', headers: {'X-API-Key' => 'kPp4zjf2X6vnYw81m5WND22ZcsLJAKYKmQsleEiR'})['results'][0]
         
         @favorite.status = @response['active']
+        @favorite.save
         
         @actions = []
         @response['actions'].each do |action|

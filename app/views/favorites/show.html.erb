@@ -1,100 +1,105 @@
-<div class="container">
+
 <div class="row page-row">
 
-<div class="col-md-12">
-<h5>Title</h5>
-<p><%= @favorite.title %></p>
-
-<% if @favorite.summary != "" %>
-<h5>Summary</h5>
-<p><%= @favorite.summary %></p>
-<% end %>
-
-<div>
- <div style="float: left; margin-right:20px">
-    <h5>Status</h5>
-      <% if @favorite.status == true %>
-        <td><i class="fa fa-toggle-on" aria-hidden="true" style="color:#00b900; margin-right:7px"></i>Active</td>
-      <% else %>
-        <td><i class="fa fa-toggle-off" aria-hidden="true" style="margin-right:7px"></i>Not Active</td>
-      <% end %>
- </div>
- <div style="float: left;">
-    <h5>Sponsor</h5>
-    <b><%= @favorite.sponsor_party %></b>, <%= @favorite.sponsor %> - <%= @favorite.sponsor_state %>
- </div>
+  <div class="col-md-6">
+    <h5>Title</h5>
+    <p><%= @favorite.title %></p>
+      
+    <% if @favorite.summary != "" %>
+      <h5>Summary</h5>
+      <p class="text-justify"><%= @favorite.summary %></p>
+    <% end %>
+    
+    <div style="float: left; margin-right:20px">
+      <h5>Status</h5>
+        <% if @favorite.status == true %>
+          <td><i class="fa fa-toggle-on" aria-hidden="true"></i>Active</td>
+        <% else %>
+          <td><i class="fa fa-toggle-off" aria-hidden="true"></i>Not Active</td>
+        <% end %>
+    </div>
+      
+    <div style="float: left;">
+      <h5>Sponsor</h5>
+      <b><%= @favorite.sponsor_party %></b>, <%= @favorite.sponsor %> - <%= @favorite.sponsor_state %>
+    </div>
+      
     <br style="clear: left;" />
-</div>
-
-<%= render 'favorites/remove', favorite: @favorite %><p></p>
-</div>
+    
+    <%= render 'favorites/remove', favorite: @favorite %><p></p>
+  </div>
+  
+  <div class="col-md-6">
+    <div style="float:right !important">
+      <h5>Bill Status by GovTrack.us</h5>
+      <div id="bill-widget"><%= @favorite.link.html_safe %></div>
+    </div>
+  </div>
+    
 </div>
 
 <div class="row page-row">
+  
+  <div class="col-md-4 col-sm-6">
 
-<div class="col-md-4 col-sm-6">
+    <h5>Actions</h5> 
+    <% @actions.each do |action| %>
+      <table class="search-layout bill-layout">
+        <% if action.chamber != nil %>
+        <tr>
+          <td>Chamber:</td>
+          <td><%= action.chamber %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td>Type:</td>
+          <td><%= action.action_type %></td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td><%= action.date %></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><%= action.description %></td>
+        </tr>
+        <tr><hr></tr>
+      </table> 
+    <% end %>
+  
+  </div>
 
-<h5>Actions</h5> 
-<% @actions.each do |action| %>
-        
-<table class="search-layout bill-layout">
-  <% if action.chamber != nil %>
-  <tr>
-    <td>Chamber:</td>
-    <td><%= action.chamber %></td>
-  </tr>
-  <% end %>
-  <tr>
-    <td>Type:</td>
-    <td><%= action.action_type %></td>
-  </tr>
-  <tr>
-    <td>Date:</td>
-    <td><%= action.date %></td>
-  </tr>
-  <tr>
-    <td>Description:</td>
-    <td><%= action.description %></td>
-  </tr>
-  <tr><hr></tr>
-</table> 
-<% end %>
-</div>
-
-<div class="col-md-4 col-sm-6">
-
-<% if @votes.first != nil %>
-<h5>Votes</h5> 
-<% end %>
-<% @votes.each do |vote| %>
-        
-<table class="search-layout bill-layout">
-  <tr>
-    <td>Chamber:</td>
-    <td><%= vote.chamber %></td>
-  </tr>
-  <tr>
-    <td>Date:</td>
-    <td><%= vote.date %></td>
-  </tr>
-  <tr>
-    <td>Question:</td>
-    <td><%= vote.question.html_safe %></td>
-  </tr>
-  <tr>
-    <td>Result:</td>
-    <td><%= vote.result %></td>
-  </tr>
-  <tr><hr></tr>
-</table> 
-<% end %>
-</div>
-
-
-<div class="col-md-4">
-  <!-- in small screens, where should this go? Top, bottom, or new page? -->
-  Google News Search
-</div>
+  <div class="col-md-4 col-sm-6">
+    
+    <% if @votes.first != nil %>
+      <h5>Votes</h5> 
+    <% end %>
+    <% @votes.each do |vote| %>
+      <table class="search-layout bill-layout">
+        <tr>
+          <td>Chamber:</td>
+          <td><%= vote.chamber %></td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td><%= vote.date %></td>
+        </tr>
+        <tr>
+          <td>Question:</td>
+          <td><%= vote.question.html_safe %></td>
+        </tr>
+        <tr>
+          <td>Result:</td>
+          <td><%= vote.result %></td>
+        </tr>
+        <tr><hr></tr>
+      </table> 
+    <% end %>
+  
+  </div>
+  
+  <div class="col-md-4">
+  </div>
 
 </div>
 

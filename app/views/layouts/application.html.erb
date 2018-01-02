@@ -1,151 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Workspace</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liberty Hawk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
     
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Archivo:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Archivo:400,700" rel="stylesheet">
 </head>
 <body>
     
-    <!-- https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 -->
-    
-<nav class="navbar navbar-default navbar-static-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <%= link_to "Liberty Hawk", root_path, :class =>"navbar-brand", :style =>"font-family: 'Playball', cursive; font-size: 2em; color: #fbce47;" %>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
+  <nav class="navbar navbar-default navbar-static-top navbar-custom">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+      
+        <%= link_to root_path, :class =>"navbar-brand", :style =>"padding-top:6px" do %>
+          <%= image_tag "title.png" %>
+        <% end %>
+      </div>
+      
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
           <% if !user_signed_in? %>
-        <li style="padding-top: 5px">
-          <form action="search" accept-charset="UTF-8" method="get">
-  <!--controller="searches"-->
-
-  <div class="form-group">
+            <li style="padding-top: 5px">
+              <form action="search" accept-charset="UTF-8" method="get">
+                <div class="form-group">
+                  <table>
+                    <tr>
+                      <td><input type="text" name="subject" class="form-control input-sm" style="min-width:225px;" /></td>
+                      <td>
+                        <button type="submit" name="Search" value="Search" class="btn btn-basic btn-sm" style="margin: 0 10px 0 10px;">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </form>
+            </li>
+            <li>
+              <%= link_to new_user_session_path do %>
+              <span class="glyphicon glyphicon-log-in"></span> Login
+              <% end %>
+            </li>
+          <% else %>   
+            <li><%= link_to "Search", searches_search_path %></li>
+            <li><%= link_to "Favorites", users_show_path %></li>
+            <li>
+              <%= link_to destroy_user_session_path do %>
+              <span class="glyphicon glyphicon-log-out"></span> Logout
+              <% end %>
+            </li> 
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
     
-    <table>
-      <tr>
-        <td><input type="text" name="subject" class="form-control input-sm" style="min-width:225px;" /></td>
-        <td>
-
-          <button type="submit" name="Search" value="Search" class="btn btn-basic btn-sm" style="margin: 0 10px 0 10px;">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </td>
-      </tr>
-    </table>
+    
+  <div class="container">
+  
+    <% if flash[:notice] %>
+      <div class="alert alert-success wrap">  
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:danger] %>
+      <div class="alert alert-danger wrap">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:danger] %>
+      </div>
+    <% elsif flash[:alert2] %>
+      <div class="alert alert-warning wrap">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert2] %>
+      </div>
+    <% end %>
+            
+    <%= yield %>
   
   </div>
-</form>
-</li>
-       <% else %>   
-     <li>
-          <%= link_to "Search", searches_search_path %>
-          <% end %>
-          </li>
-        <% if current_user %>
-          <li><%= link_to "Favorites", users_show_path %></li>
-        <% end %>
-        <% if !current_user %>
-          <li><%= link_to new_user_session_path do %>
-            <span class="glyphicon glyphicon-log-in"></span> Login
-            <% end %>
-          </li>
-        <% else %>
-          <li><%= link_to destroy_user_session_path do %>
-            <span class="glyphicon glyphicon-log-out"></span> Logout
-            <% end %>
-          </li>      
-        <% end %>
-        <li><%= link_to "About", welcome_about_path %></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-    
-    
-<div class="container">
-  <!--style="border:1px solid black;"-->
-  <!--<div class="row justify-content-md-center">-->
-      
-        <% if flash[:notice] %>
-            <div class="alert alert-success wrap">
-               <button type="button" class="close" data-dismiss="alert">&times;</button>
-               <%= flash[:notice] %>
-             </div>
-         <% elsif flash[:danger] %>
-            <div class="alert alert-warning wrap">
-               <button type="button" class="close" data-dismiss="alert">&times;</button>
-               <%= flash[:danger] %>
-            </div>
-         <% end %>
-      
-        <!--style="border:1px solid black;"-->
-          
-        <%= yield %>
 
-    </div>
-</div>
-
-<script>
-
-
-function lastWord () {
-	$('div.historyToggle').html(function(){	
-		// separate the text by spaces
-		var text= $(this).text().split(' ');
-		// drop the last word and store it in a variable
-		var last = text.pop();
-		// alert(last);
-		// join the text back and if it has more than 1 word add the span tag
-		// to the last word
-		return text.join(" ") + (text.length > 0 ? ' <p class="last" style="float:right" onclick="toggleHistory();">'+last+'</p>' : last);   
-	});
-}
-
-function toggleHistory() {
-    var x = document.getElementById("history");
-    var y = document.getElementById("historyTog");
-    var z = document.getElementById("historyTogSm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.textContent="Last 10 searches Hide";
-        z.textContent="Last 10 searches Hide";
-    } else {
-        x.style.display = "none";
-        y.textContent="Last 10 searches Show";
-        z.textContent="Last 10 searches Show";
-    }
-		
-  lastWord();
-}
-
-jQuery(document).ready(lastWord());
-
-</script>
+  <script>
+  
+  // function to get last word of search history panel heading, and apply css and an onclick function to it. 
+  function lastWord () {
+  	$('div.historyHeader').html(function(){	
+  		// separate the text by spaces
+  		var text= $(this).text().split(' ');
+  		// drop the last word and store it in a variable
+  		var last = text.pop();
+  		// join the text back and if it has more than 1 word add the span tag
+  		// to the last word
+  		return text.join(" ") + (text.length > 0 ? ' <p class="last" style="float:right" onclick="toggleHistory();">'+last+'</p>' : last);   
+  	});
+  }
+  
+  // function to toggle display of the history panel body and heading content
+  function toggleHistory() {
+      var x = document.getElementById("history");
+      var y = document.getElementById("historyTog");
+      var z = document.getElementById("historyTogSm");
+      if (x.style.display === "none" || z.textContent === 'Last 10 searches Show') {
+          x.style.display = "block";
+          y.textContent="Last 10 searches Hide";
+          z.textContent="Last 10 searches Hide";
+      } else {
+          x.style.display = "none";
+          y.textContent="Last 10 searches Show";
+          z.textContent="Last 10 searches Show";
+      }
+  	
+  	// call of last word function to update the last word of the history panel heading (make it a link)
+    lastWord();
+  }
+  
+  jQuery(document).ready(lastWord());
+  
+  </script>
 
 </body>
 </html>

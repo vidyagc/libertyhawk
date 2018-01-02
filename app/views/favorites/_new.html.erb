@@ -1,47 +1,72 @@
-<% @bill = Bill.find(bill.id) %>
+<% if user_signed_in? %>
 
-<%= link_to bill.title, bill, class: "bill-link" %></br>
-<table class="search-layout">
-  <tr>
-    <td>Status:</td>
-    <% if @bill.status == true %>
-      <td><i class="fa fa-toggle-on" aria-hidden="true" style="color:#00b900; margin-right:7px"></i>Active</td>
-    <% else %>
-      <td><i class="fa fa-toggle-off" aria-hidden="true" style="margin-right:7px"></i>Not Active</td>
-    <% end %>
-  </tr>
-  <tr>
-    <td>Sponsor:</td>
-    <td><b><%= @bill.sponsor_party %></b>, <%= @bill.sponsor %> - <%= @bill.sponsor_state %></td>
-  </tr>
-  <tr>
-    <td>Introduced:</td>
-    <td><%= @bill.date.to_date.strftime("%B, %d, %Y") %></td>
-  </tr>
-</table>
+  <% @bill = Bill.find(bill.id) %>
+  
+  <%= link_to bill.title, bill, class: "bill-link" %></br>
+  <table class="search-layout">
+    <tr>
+      <td>Status:</td>
+      <% if @bill.status == true %>
+        <td><i class="fa fa-toggle-on" aria-hidden="true"></i>Active</td>
+      <% else %>
+        <td><i class="fa fa-toggle-off" aria-hidden="true"></i>Not Active</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Sponsor:</td>
+      <td><b><%= @bill.sponsor_party %></b>, <%= @bill.sponsor %> - <%= @bill.sponsor_state %></td>
+    </tr>
+    <tr>
+      <td>Introduced:</td>
+      <td><%= @bill.date.to_date.strftime("%B %d, %Y") %></td>
+    </tr>
+  </table>
 
-<%= form_tag url_for(:controller => "favorites", :action => "create"), :method => :POST do %>
- <div class="form-group" style="margin-bottom: 20px">
-    <%= hidden_field_tag :rdpath , local_assigns[:rdpath]  %>
-    <%= hidden_field_tag :id , @bill.id %>
-
-    <%if !current_user %>
-        <%= button_tag(type: "submit", class: "btn btn-default btn-save") do %>
-          <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
-        <% end %>
-    <% else %>
-        <% if current_user.favorites.where(bill_id: @bill.bill_id).present? %>
-        
-          <%= link_to favorites_remove_two_path(@bill, rdpath: searches_search_path), method: "delete", class: "btn btn-default btn-unsave" do %>
-            Unsave
+  <%= form_tag url_for(:controller => "favorites", :action => "create"), :method => :POST do %>
+    <div class="form-group" style="margin-bottom: 20px">
+      <%= hidden_field_tag :rdpath , local_assigns[:rdpath]  %>
+      <%= hidden_field_tag :id , @bill.id %>
+      <%if !current_user %>
+          <%= button_tag(type: "submit", class: "btn btn-default btn-save") do %>
+            <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
           <% end %>
-    
-        <% else %>
-            <%= button_tag(type: "submit", class: "btn btn-default btn-save") do %>
-                <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
-            <% end %>
-        <% end %>
-    <% end %>
- </div>
-<% end %>
+      <% else %>
+          <% if current_user.favorites.where(bill_id: @bill.bill_id).present? %>
+            <%= link_to "Unsave", favorites_remove_two_path(@bill, rdpath: searches_search_path), method: "delete", class: "btn btn-default btn-unsave" %>
+          <% else %>
+              <%= button_tag(type: "submit", class: "btn btn-default btn-save") do %>
+                  <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
+              <% end %>
+          <% end %>
+      <% end %>
+    </div>
+  <% end %>
 
+<% else %>
+
+  <p><%= link_to bill.title, bill_path(:bill_id=>bill.bill_id), class: "bill-link" %></br>
+  
+  <table class="search-layout">
+    <tr>
+      <td>Status:</td>
+      <% if bill.status == true %>
+        <td><i class="fa fa-toggle-on" aria-hidden="true"></i>Active</td>
+      <% else %>
+        <td><i class="fa fa-toggle-off" aria-hidden="true"></i>Not Active</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Sponsor:</td>
+      <td><b><%= bill.sponsor_party %></b>, <%= bill.sponsor %> - <%= bill.sponsor_state %></td>
+    </tr>
+    <tr>
+      <td>Introduced:</td>
+      <td><%= bill.date.to_date.strftime("%B, %d, %Y") %></td>
+    </tr>
+  </table>
+  
+  <%= link_to new_user_session_path(:alert=>true), class: "btn btn-default btn-save" do %>
+    <i class="fa fa-star" aria-hidden="true" style="padding-right: 5px"></i> Save
+  <% end %>
+
+<% end %>
