@@ -100,6 +100,9 @@
   
   </div>
 
+
+<div id="footer" class="footer navbar-static-bottom"><div>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2017 Vidya Neni All Rights Reserved</div></div>
+
   <script>
   
   // function to get last word of search history panel heading, and apply css and an onclick function to it. 
@@ -133,9 +136,13 @@
   	// call of last word function to update the last word of the history panel heading (make it a link)
     lastWord();
   }
-  
-  jQuery(document).ready(lastWord());
-  
+
+  var hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
+  if (hasScrollbar) {
+    var f = document.getElementById("footer");
+    f.style.position="relative";
+  }
+ 
   </script>
 
 </body>

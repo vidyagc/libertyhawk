@@ -27,6 +27,7 @@ delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
   
   get 'searches/sort', to: 'searches#sort'
   get 'searches/search', to: 'searches#search'
+  get 'users/search', to: 'searches#search'
   
   # these are causing possible problems for when users are logged in and accidentally go to these routes (other action calls on search results page break).
   # need to add constraints... have a partial there instead of search box by itself? not sure that would work. Find way to have conditional, that routes don't 

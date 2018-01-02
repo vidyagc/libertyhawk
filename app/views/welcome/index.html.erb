@@ -1,25 +1,51 @@
-<div class="row page-row">
+<div class="row page-row" style="margin-top:35px;">
 
     <div class="col-md-4">
             
-        <div style="text-align:center">
-            About (with fa info icon) 
+        
+            <div style="text-align: center; margin-top:18px"><h2>About</h2></div>
+            <div style="text-align:justify; font-family: 'Archivo', sans-serif; font-size:1.1em">
+            <p>Liberty Hawk is congressional bill search application that uses the ProPublica API ‘Search Bills’ endpoint. Other endpoints (more search options) will be added in the future (e.g. ‘Bills by a Subject’ or ‘Upcoming Bills’). The ‘Search Bills’ request returns the 20 most recent bills by keyword. ProPublica’s ‘Get a Specific Bill’ request is used to populate full bill Action and Vote history on the show pages. </p>
+            <p>Also, a Bill Status Widget powered by GovTrack.us is incorporated on the show pages for bills and favorites. The information inside this widget does not include anything that isn’t already on the bill show page, but it does provide some useful links. </p>
         </div>
         
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4" >
             
-        <div style="text-align:center">
-            <%= image_tag "hawk-logo.png" %> 
+        <div style="text-align:center;">
+            <%= image_tag "logo-2.png" %> 
         </div>
         
     </div>
         
     <div class="col-md-4">
             
-        <div style="text-align:center">
-            Features (mobile friendly and account benefits)
+        <div style="margin-top:18px; text-align:justify; font-family: 'Archivo', sans-serif; font-size:1.1em;" class="features-info">
+            <div style="text-align: center;"><h2>Features</h2></div>
+            <table>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>The ability to sort search results by different criteria</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>Save (favorite) bills</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>Logged in users can see a history of their last ten searches, and rerun them via a link</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>Responsive views (Liberty Hawk is designed for use on notebooks and mobile devices). Test it out in different viewports</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>Your most recent search results are persisted to the database and available even after you leave your current session</td>
+                </tr>
+            </table> 
+
         </div>
         
     </div>
