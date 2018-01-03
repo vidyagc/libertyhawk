@@ -20,3 +20,5 @@ gem 'turbolinks'
 
 gem 'devise'
 gem 'httparty'
+
+gem 'figaro', '1.0'
