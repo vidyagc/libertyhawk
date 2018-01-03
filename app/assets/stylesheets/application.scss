@@ -96,12 +96,86 @@ h5 {
     padding-top: 15px;
 }
 
-.logo-info, .features-info .fa-star {
+.fp-par {
+    margin-top:18px; 
+    text-align:justify; 
+    font-family: 'Archivo', sans-serif; 
+    font-size:1.1em;
+}
+
+// FIX REPETITION
+.logo-info .fa-star {
     padding-right:5px; 
     color:#d56367;
 }
 
-div.logo-info, div.features-info tr {
+div.features-info .fa-star {
+    padding-right:5px; 
+    color:#d56367;
+}
+
+#inner {
+  display: table;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 769px) {
+    hr.star-primary {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 767px) {
+    form#search-resp {
+        display: none;
+    }
+}
+
+// hr.star-light,
+hr.star-primary {
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+    overflow: visible;
+}
+
+// hr.star-light:after,
+hr.star-primary:after {
+    content: "\f005";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+
+// hr.star-light {
+//     border-color: #fff;
+// }
+
+// hr.star-light:after {
+//     color: #fff;
+//     background-color: #ce2027;
+// }
+
+hr.star-primary {
+    border-color: #ce2027;
+}
+
+hr.star-primary:after {
+    color: #ce2027;
+    background-color: #fff;
+}
+
+.logo-info tr {
+    vertical-align:top;
+}
+
+div.features-info tr {
     vertical-align:top;
 }
 

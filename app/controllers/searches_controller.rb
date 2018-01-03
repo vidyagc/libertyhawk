@@ -121,9 +121,9 @@ class SearchesController < ApplicationController
                 end
             else 
                 if !user_signed_in?
-                    redirect_to root_path, :flash => { :alert2 => "Your search yielded no results." }
+                    redirect_to root_path, :flash => { :alert => "Your search yielded no results." }
                 else 
-                    redirect_to request.path, :flash => { :alert2 => "Your search yielded no results." }
+                    redirect_to request.path, :flash => { :alert => "Your search yielded no results." }
                     clear_old_search
                     return 
                 end 

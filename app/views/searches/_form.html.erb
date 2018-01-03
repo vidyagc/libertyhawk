@@ -44,25 +44,44 @@
 <% end %>
 
 <% if !user_signed_in? %>
-  <div class="logo-info">
-    <p>ACCOUNT BENEFITS</p>
-    <table>
-      <tr>
-        <td><i class="fa fa-star" aria-hidden="true"></i></td>
-        <td>Save searched bills</td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-star" aria-hidden="true"></i></td>
-        <td>Access your last ten searches</td>
-      </tr>
+  <div style="padding-bottom:35px;">
+    <div id="inner" class="logo-info">
+      <p>ACCOUNT BENEFITS</p>
+      <table>
         <tr>
-        <td colspan="2">
-          <%= link_to new_user_session_path do %>
-            <button type="button" class="btn btn-info btn-sm" id="btn-signup">Sign In or Sign Up</button>
-          <% end %>
-        </td>
-      </tr>
-    </table>
+          <td><i class="fa fa-star" aria-hidden="true"></i></td>
+          <td>Save searched bills</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-star" aria-hidden="true"></i></td>
+          <td>Access your last ten searches</td>
+        </tr>
+          <tr>
+          <td colspan="2">
+            <%= link_to new_user_session_path do %>
+              <button type="button" class="btn btn-info btn-sm" id="btn-signup">Sign In or Sign Up</button>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
+  
+  <form action="search" accept-charset="UTF-8" method="get" id="search-resp">
+  <!--could use div clas hidden-sm or hidden-xs-->
+    <div class="form-group">
+      <table>
+        <tr>
+          <td><input type="text" name="subject" class="form-control" style="min-width:225px;" /></td>
+          <td>
+            <button type="submit" name="Search" value="Search" class="btn btn-basic" style="margin: 0 10px 0 10px;">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+  
 <% end %>
 

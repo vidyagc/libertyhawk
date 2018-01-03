@@ -1,32 +1,33 @@
 <div class="row page-row" style="margin-top:35px;">
 
-    <div class="col-md-4">
-            
         
-            <div style="text-align: center; margin-top:18px"><h2>About</h2></div>
-            <div style="text-align:justify; font-family: 'Archivo', sans-serif; font-size:1.1em">
+    <div class="col-md-4 col-md-push-4">
+            
+        <div style="text-align:center;">
+            <%= image_tag "logo.png" %> 
+        </div>
+    
+        <hr class="star-primary" style="display:visible">    
+    </div>
+    
+
+    <div class="col-md-4 col-md-pull-4">
+        <div class="fp-par">
+            <div style="text-align: center;"><h2>About</h2></div>
             <p>Liberty Hawk is congressional bill search application that uses the ProPublica API ‘Search Bills’ endpoint. Other endpoints (more search options) will be added in the future (e.g. ‘Bills by a Subject’ or ‘Upcoming Bills’). The ‘Search Bills’ request returns the 20 most recent bills by keyword. ProPublica’s ‘Get a Specific Bill’ request is used to populate full bill Action and Vote history on the show pages. </p>
             <p>Also, a Bill Status Widget powered by GovTrack.us is incorporated on the show pages for bills and favorites. The information inside this widget does not include anything that isn’t already on the bill show page, but it does provide some useful links. </p>
         </div>
-        
-    </div>
-
-    <div class="col-md-4" >
-            
-        <div style="text-align:center;">
-            <%= image_tag "logo-2.png" %> 
-        </div>
-        
+        <hr class="star-primary" style="display:visible">
     </div>
         
     <div class="col-md-4">
             
-        <div style="margin-top:18px; text-align:justify; font-family: 'Archivo', sans-serif; font-size:1.1em;" class="features-info">
+        <div class="features-info fp-par">
             <div style="text-align: center;"><h2>Features</h2></div>
             <table>
                 <tr>
                     <td><i class="fa fa-star" aria-hidden="true"></i></td>
-                    <td>The ability to sort search results by different criteria</td>
+                    <td>Sort search results by different criteria</td>
                 </tr>
                 <tr>
                     <td><i class="fa fa-star" aria-hidden="true"></i></td>
@@ -42,7 +43,11 @@
                 </tr>
                 <tr>
                     <td><i class="fa fa-star" aria-hidden="true"></i></td>
-                    <td>Your most recent search results are persisted to the database and available even after you leave your current session</td>
+                    <td>Most recent search results are saved and available after the current session is logged out</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td>Upcoming Feature! Organize favorites by creating folders and sorting saved bills into them</td>
                 </tr>
             </table> 
 
