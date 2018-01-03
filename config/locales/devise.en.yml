@@ -51,7 +51,6 @@ en:
     # add following two to stop flash messages on sign in
     sessions: 
       signed_in: ''
-    sessions: 
       signed_out: ''
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
