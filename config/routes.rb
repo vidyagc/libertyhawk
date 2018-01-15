@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   get 'users/show'
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   
-devise_scope :user do
-  get '/users/sign_out' => 'devise/sessions#destroy'
-end
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
-# post 'searches/create' => 'favorites#create'
+  # post 'searches/create' => 'favorites#create'
   
-# resources :favorites, only: [:create, :destroy, :show]
+  # resources :favorites, only: [:create, :destroy, :show]
 
-post 'favorites/create' => 'favorites#create'
-delete 'favorites/remove' => 'favorites#destroy'
-get 'bill' => 'searches#show'
-get 'favorite' => 'favorites#show'
+  post 'favorites/create' => 'favorites#create'
+  delete 'favorites/remove' => 'favorites#destroy'
+  get 'bill' => 'searches#show'
+  get 'favorite' => 'favorites#show'
 
 delete 'favorites_remove_two' => 'favorites#destroy_search_bill'
 

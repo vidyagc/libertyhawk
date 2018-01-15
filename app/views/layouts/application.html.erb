@@ -92,7 +92,7 @@
     <% elsif flash[:alert2] %>
       <div class="alert alert-warning wrap">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:alert2] %>
+        <%= flash[:alert2].html_safe %>
       </div>
     <% end %>
             

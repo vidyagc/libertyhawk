@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :auth_user, only: [:show] 
 
   def show
-        @user = User.find(current_user) 
-        @favorites = @user.favorites
+    @user = User.find(current_user) 
+    @favorites = @user.favorites
   end
 
 private
