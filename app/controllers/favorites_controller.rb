@@ -48,7 +48,7 @@ class FavoritesController < ApplicationController
         end 
         
         rescue ActiveRecord::RecordNotFound
-        redirect_to users_show_path, :flash => { :alert => "Record not found." }
+        redirect_to users_show_path, :flash => { :alert2 => "Record not found." }
     end 
    
     def create
@@ -72,9 +72,9 @@ class FavoritesController < ApplicationController
             # flash[:notice] = "Bill saved successfully."
         else
             if @favorite.errors.messages.empty?
-                flash[:alert] = "Bill could not be saved"
+                flash[:alert2] = "Bill could not be saved"
             else 
-                flash[:alert] = @favorite.errors.messages.first[1][0]
+                flash[:alert2] = @favorite.errors.messages.first[1][0]
             end 
         end
 
@@ -89,7 +89,7 @@ class FavoritesController < ApplicationController
             # flash[:notice] = "Bill was deleted from your saved bills."
             redirect_to users_show_path
         else
-            flash[:alert] = "Bill couldn't be deleted. Try again."
+            flash[:alert2] = "Bill couldn't be deleted. Try again."
             redirect_to users_show_path
         end
     end
@@ -101,7 +101,7 @@ class FavoritesController < ApplicationController
             # flash[:notice] = "Bill was deleted from your saved bills."
             redirect_to params[:rdpath]
         else
-            flash[:alert] = "Bill couldn't be deleted. Try again."
+            flash[:alert2] = "Bill couldn't be deleted. Try again."
             redirect_to params[:rdpath]
         end
     end 

@@ -17,10 +17,9 @@
                         <td>
                             <div style="max-width: 130px;">
                                 <select name="sort_type" form="sort_type" onchange="this.form.submit()" class="form-control" style="padding: 0 0 0 4px !important;">
-                                    <option value="default">Default</option>
+                                    <option value="default">Date Introduced</option>
                                     <option value="title" <% if current_user.sort == "title" %> selected <% end %>>Title</option>
                                     <option value="active" <% if current_user.sort == "active" %> selected <% end %>>Active Status</option>
-                                    <option value="date" <% if current_user.sort == "date" %> selected <% end %> >Date Introduced</option>
                                 </select>
                             </div>
                         </td>
@@ -32,8 +31,6 @@
                 <% @bills = current_user.bills.sort_by {|bill| bill.title} %>
             <% elsif current_user.sort == "active" %>
                 <% @bills = current_user.bills.sort_by {|bill| bill.status ? 0 : 1} %>
-            <% elsif current_user.sort == "date" %>
-                <% @bills = current_user.bills.sort_by {|bill| bill.date} %>   
             <% else %>
                 <% @bills = current_user.bills %>
             <% end %>
