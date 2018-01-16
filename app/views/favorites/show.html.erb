@@ -28,10 +28,10 @@
     <%= render 'favorites/remove', favorite: @favorite %><p></p>
   </div>
   
-  <div class="col-md-6">
-    <div style="float:right !important">
+  <div class="col-md-6" style="">
+    <div style="float:right !important;">
       <h5>Bill Status by GovTrack.us</h5>
-      <div id="bill-widget"><%= @favorite.link.html_safe %></div>
+      <div id="bill-widget" style=""><%= @favorite.link.html_safe %></div>
     </div>
   </div>
     

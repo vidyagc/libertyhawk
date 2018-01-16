@@ -37,7 +37,11 @@
           <%= f.submit "Log in", :class=>"btn btn-basic" %>
         </div>
       <% end %>
+      <br>
+      <p><%= link_to "Forgot your password?", new_password_path(resource_name), :class=>"auth" %></p>
+      <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
     </div>
+    
   </div>
 
   <div class="col-md-3 col-sm-4 mid-field">
