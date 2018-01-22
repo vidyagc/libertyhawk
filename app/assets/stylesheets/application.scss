@@ -69,6 +69,12 @@ h5 {
 }
 
 @media screen and (max-width: 768px) {
+    .billWidg {
+        float: left;
+    }
+    .panel-history {
+        display:none;
+    }
     #large {
         display: none;
     }
@@ -92,6 +98,9 @@ h5 {
     }
     .footer {
         position: relative;
+    }
+    .wrapper {
+        min-height: 86vh;
     }
 }
 
@@ -127,9 +136,31 @@ div.features-info .fa-star {
   margin: 0 auto;
 }
 
+#searchHelp hr { margin:  10px 10px; }
+
+@media screen and (max-width: 550px) {
+    .billWidg {
+        float: left;
+        max-width: 360px;
+    }
+    #bill-widget {
+        transform: scale(0.65);
+        margin-top:-30px;
+        margin-left:-87px;
+        margin-bottom:-15px;
+        margin-right:-85px;
+    }
+}
+
 @media screen and (min-width: 769px) {
+    .billWidg {
+        float: right;
+    }
     hr.star-primary {
         display: none;
+    }
+    .panel-history-small {
+        display:none;
     }
     #large {
         display: visible;

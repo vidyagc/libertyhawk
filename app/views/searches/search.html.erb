@@ -47,6 +47,7 @@
                     <%= render 'favorites/new', bill: bill %><p></p>
                 
                 <% end %>
+            <% elsif !user_signed_in? %>
             <% end %>
         <% end %>
 

@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-8 col-md-pull-4">
-        <h2>Saved Bills</h2>
+        <h2>Saved Bills <span style="font-size:.65em">(<%= current_user.email %>)</span></h2>
 
         <% @user.favorites.each do |favorite| %>
         

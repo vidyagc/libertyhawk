@@ -78,30 +78,30 @@
     
     
   <div class="container">
-  
-    <% if flash[:notice] %>
-      <div class="alert alert-success wrap">  
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:notice] %>
-      </div>
-    <% elsif flash[:danger] %>
-      <div class="alert alert-danger wrap">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:danger] %>
-      </div>
-    <% elsif flash[:alert2] %>
-      <div class="alert alert-warning wrap">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:alert2].html_safe %>
-      </div>
-    <% end %>
-            
-    <%= yield %>
-  
+    <div class="wrapper">
+      <% if flash[:notice] %>
+        <div class="alert alert-success wrap">  
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:danger] %>
+        <div class="alert alert-danger wrap">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:danger] %>
+        </div>
+      <% elsif flash[:alert2] %>
+        <div class="alert alert-warning wrap">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert2].html_safe %>
+        </div>
+      <% end %>
+              
+      <%= yield %>
+    </div>
   </div>
 
 
-<div id="footer" class="footer navbar-static-bottom"><div>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2017 Vidya Neni All Rights Reserved</div></div>
+<div id="footer" class="footer ><div>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2017 Vidya Neni All Rights Reserved</div></div>
 
   <script>
   
@@ -121,15 +121,13 @@
   // function to toggle display of the history panel body and heading content
   function toggleHistory() {
       var x = document.getElementById("history");
-      var y = document.getElementById("historyTog");
       var z = document.getElementById("historyTogSm");
       if (x.style.display === "none" || z.textContent === 'Last 10 searches Show') {
           x.style.display = "block";
-          y.textContent="Last 10 searches Hide";
           z.textContent="Last 10 searches Hide";
-      } else {
+      } 
+      else {
           x.style.display = "none";
-          y.textContent="Last 10 searches Show";
           z.textContent="Last 10 searches Show";
       }
   	

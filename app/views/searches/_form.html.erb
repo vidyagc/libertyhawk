@@ -10,20 +10,57 @@
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </td>
+          <td valign="bottom">
+            <i class="fa fa-info-circle fa-lg" aria-hidden="true" style="color: #e6902a; margin-left: 15px" data-toggle="collapse" data-target="#searchHelp"></i>
+          </td>
         </tr>
       </table>
     </div>
   </form>
 <% end %>
 
+<div id="searchHelp" class="collapse" style="text-align:justify; margin-top:15px; margin-bottom:20px; background:#fafafa; border-radius:4px; max-width: 350px; border:1px solid #e1e1e1; padding:15px">
+  <div style="text-align: center;"><span style="color: #e6902a !important;"><h5 style="display:inline-block">How to Use Search Terms</h5></span></div>
+  <ul style="padding-left: opx; margin-left: 0px; text-indent: opx;" class="list-inline"> 
+      <li>Search the title and full text of legislation by keyword to get the 20 most recent bills.</li>
+      <hr>
+      <li>Searches cover House and Senate bills from the 113th Congress through the current Congress (115th).</li>
+      <hr>
+      <li><b>Multiple words</b> (e.g. query=health care) are treated as multiple keywords using the OR operator. Quoting the words (e.g. query="health care") makes it a phrase search.</li>
+  </ul>  
+</div>
+
 <% if user_signed_in? && !current_user.searches.first.nil? %>
-  <div class="panel panel-default" style="max-width: 350px">
+  <div class="panel panel-default panel-history-small" style="max-width: 350px">
     <div class="panel-heading">
-      <div id="historyTog" class="historyHeader">Last 10 searches Hide</div>
       <div id="historyTogSm" class="historyHeader">Last 10 searches Show</div>
     </div>
     <div class="panel-body">
       <div id="history">
+        <% current_user.searches.order('created_at DESC').each do |search| %>
+    
+          <table width="100%">
+            <tr>
+              <td align="left">
+                <%= link_to controller: "searches", action: "search", method: "get", subject: search.metadata do %><u><%= search.metadata %></u><% end %>
+              </td>
+              <td align="right">
+                <%= search.created_at.to_date %>
+              </td>
+            </tr>
+          </table>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default panel-history" style="max-width: 350px">
+    <div class="panel-heading">
+      <div>Last 10 searches</div>
+    </div>
+    <div class="panel-body">
+      <div>
         <% current_user.searches.order('created_at DESC').each do |search| %>
     
           <table width="100%">
@@ -84,4 +121,5 @@
   </form>
   
 <% end %>
+
 

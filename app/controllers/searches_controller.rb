@@ -101,9 +101,18 @@ class SearchesController < ApplicationController
                 @response.each do |bill|
                     bill_slug = bill['bill_id'].split('-')[0]
                     congress = bill['bill_id'].split('-')[1]
+                    
+                    # not all bills have a short_title, so this conditional ensure the title isn't nil
+                    if !bill['short_title'].nil?
+                        btitle=bill['short_title']
+                    else 
+                        btitle=bill['title']
+                    end 
+                    
+                    # raise bill['short_title'].to_s.length
                     @bill  = Bill.new(
                        bill_id: bill['bill_id'],
-                       title: bill['short_title'],
+                       title: btitle,
                        summary: bill['summary'],
                        date: bill['introduced_date'],
                        sponsor: bill['sponsor_name'],
