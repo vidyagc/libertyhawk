@@ -99,6 +99,9 @@ h5 {
     .footer {
         position: relative;
     }
+}
+
+@media screen and (max-width: 1024px) {
     .wrapper {
         min-height: 86vh;
     }
@@ -120,7 +123,6 @@ h5 {
     font-size:1.1em;
 }
 
-// FIX REPETITION
 .logo-info .fa-star {
     padding-right:5px; 
     color:#d56367;
@@ -137,6 +139,19 @@ div.features-info .fa-star {
 }
 
 #searchHelp hr { margin:  10px 10px; }
+
+.bill-widget {
+    border-radius: 5px; 
+    padding: 2px; 
+    background-color: #f3f1e9; 
+    border: 1px solid #dad8d1; 
+    max-width: 505px;
+    max-height: 205px;
+    transform: scale(0.90);
+    margin-right:-30px;
+    margin-left:-25px;
+    
+}
 
 @media screen and (max-width: 550px) {
     .billWidg {
