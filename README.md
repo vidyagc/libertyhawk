@@ -1,31 +1,26 @@
 == README
 
-# Liberty Hawk
-Liberty Hawk is an app that allows you to get information about your elected officials, legislation that affects you, and the top news stories on these officials and legislation subject areas. 
+## Liberty Hawk
+Liberty Hawk is an app that allows you to congressional bill information on legislation that affects you. It uses the ProPublica API. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Ruby version 
+2.3.4p301
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Rails version
+4.2.5
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Setup 
+
+#### Clone the repository  
+
+#### Database creation
+'sqlite3' gem for the Development database
+'bundle install --without production'
+'rake db:create' to create the database 
+
+#### Database initialization
+'rake db:migrate' to run migrations and seed
+
+#### Deployment instructions
+'rails s'

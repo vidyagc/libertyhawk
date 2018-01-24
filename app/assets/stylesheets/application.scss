@@ -90,20 +90,17 @@ h5 {
     #historyTogSm {
         display: visible;
     }
-    .footer {
-        position: relative;
-    }
     #index-row {
        margin-top: 20px !important; 
     }
-    .footer {
-        position: relative;
-    }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1366px) {
     .wrapper {
         min-height: 86vh;
+    }
+    .footer {
+        position: relative;
     }
 }
 
@@ -150,7 +147,6 @@ div.features-info .fa-star {
     transform: scale(0.90);
     margin-right:-30px;
     margin-left:-25px;
-    
 }
 
 @media screen and (max-width: 550px) {
