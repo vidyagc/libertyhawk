@@ -7,8 +7,10 @@
     
       <div class="field">
         <%= f.label :email %><br />
-        <div class="col-xs-3" style="padding-left:0 !important">
-          <%= f.email_field :email, autofocus: true, :class=>"form-control" %><br />
+        <div class="col-xs-9 col-sm-3" style="padding-left:0 !important">
+          <div style="max-width:245px">
+            <%= f.email_field :email, autofocus: true, :class=>"form-control" %><br />
+          </div>
         </div>
       </div>
     
