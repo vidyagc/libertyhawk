@@ -106,8 +106,8 @@
   <script>
   
   // function to get last word of search history panel heading, and apply css and an onclick function to it. 
-  function lastWord () {
-  	$('div.historyHeader').html(function(){	
+  function lastWord() {
+  	$('div#historyHeader').html(function(){	
   		// separate the text by spaces
   		var text= $(this).text().split(' ');
   		// drop the last word and store it in a variable
@@ -121,7 +121,7 @@
   // function to toggle display of the history panel body and heading content
   function toggleHistory() {
       var x = document.getElementById("history");
-      var z = document.getElementById("historyTogSm");
+      var z = document.getElementById("historyHeader");
       if (x.style.display === "none" || z.textContent === 'Last 10 searches Show') {
           x.style.display = "block";
           z.textContent="Last 10 searches Hide";
@@ -135,6 +135,7 @@
     lastWord();
   }
 
+  // call of last word function to update the last word of the history panel heading on page load
   jQuery(document).ready(lastWord());
 
   var hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
