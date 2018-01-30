@@ -22,3 +22,5 @@ gem 'devise'
 gem 'httparty'
 
 gem 'figaro', '1.0'
+
+gem 'jquery-easing-rails'
